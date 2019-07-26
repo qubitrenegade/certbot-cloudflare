@@ -1,12 +1,10 @@
 # To learn more about Custom Resources, see https://docs.chef.io/custom_resources.html
-#
-#
-# certbot -i nginx -a dns-cloudflare --dns-cloudflare-credentials /etc/certbot-cloudflare.ini --expand -d turn.qbrd.cc,qbrd.cc,www.qbrd.cc,matrix.qbrd.cc,chat.qbrd.cc --post-hook 'systemctl restart matrix-synapse
+
 provides :certbot_cf
 resource_name :certbot_cf
 
 property :domains, [String, Array], name_property: true, coerce: proc { |x| [x].flatten }
-
+property :post_hook, [String, Array], coerce: proc { |x| [x].flatten }
 default_action :install
 
 action :install do
@@ -17,9 +15,11 @@ action :install do
 
     find_resource :certbot, 'collected_domains' do |_new_resource|
       domains []
+      post_hook []
     end
   end
   r.domains += new_resource.domains
+  r.post_hook += new_resource.post_hook if new_resource.post_hook
 end
 
 def after_created
