@@ -65,6 +65,7 @@ action_class do
         email: cf_email,
         api_key: cf_api_key
       )
+      cookbook 'whatthefuckingfuckwhyisthisbeingignored'
       sensitive true
       action :create
     end

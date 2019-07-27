@@ -24,7 +24,7 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[certbot-cloudflare::default]
+      - recipe[test-certbot-cloudflare::default]
     verifier:
       inspec_tests:
         - test/integration/default
@@ -33,6 +33,6 @@ suites:
         agree_to_tos: true
         dry_run: false
         email: <%= ENV['CBCF_EMAIL'] %>
-        server: stage
+        server: prod
         cloudflare:
           api_key: <%= ENV['CBCF_API_KEY'] %>
