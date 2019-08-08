@@ -1,2 +1,2 @@
-certbot_cf 'foo.example.com'
-certbot_cf 'bar.example.com'
+certbot_exec 'foo.example.com'
+certbot_exec 'bar.example.com'

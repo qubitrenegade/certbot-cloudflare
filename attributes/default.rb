@@ -1,3 +1,17 @@
+override['certbot-exec']['email'] = 'foobar@example.com'
+override['certbot-exec']['packages'] = case node['platform']
+when 'redhat', 'centos'
+  %w(
+    certbot
+    python2-certbot-dns-cloudflare
+  )
+when 'ubuntu', 'debian'
+  %w(
+    certbot
+    python3-certbot-dns-cloudflare
+  )
+end
+
 default['certbot_cf'] = {
   # This is default to false,
   # you must set it to true to denote your acceptance of _their_ TOS

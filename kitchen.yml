@@ -29,6 +29,9 @@ suites:
       inspec_tests:
         - test/integration/default
     attributes:
+      certbot-exec:
+        print_cmd: true
+        server: stage
       certbot_cf:
         agree_to_tos: true
         dry_run: false

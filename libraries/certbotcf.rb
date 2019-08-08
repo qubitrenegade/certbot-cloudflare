@@ -8,8 +8,8 @@
 # single word that starts with a capital letter and then continues to use
 # camel-casing throughout the remainder of the name.
 #
-module CertbotCF
-  module Helpers
+module CertbotExec
+  module CloudflareHelpers
     def certbot_cf
       node['certbot_cf']
     end

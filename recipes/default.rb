@@ -24,5 +24,3 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-certbot_cf 'foo.example.com'
-certbot_cf 'bar.example.com'
