@@ -7,7 +7,7 @@ module CertbotExec
       [
         '-a dns-cloudflare',
         "--dns-cloudflare-credentials #{cf_credentials_path}",
-        "--dns-cloudflare-propagation-seconds #{cf_dns_propagation_seconds.to_s}"
+        "--dns-cloudflare-propagation-seconds #{cf_dns_propagation_seconds}",
       ] + super
     end
   end
@@ -28,7 +28,7 @@ module CertbotExec
           sensitive true
           action :create
           subscribes :create, 'certbot_cmd[execute-certbot]', :before
-        end        
+        end
       end
       super
     end
