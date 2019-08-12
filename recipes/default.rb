@@ -1,5 +1,5 @@
 #
-# Cookbook:: certbot-cloudflare
+# Cookbook:: certbot-exec-cloudflare
 # Recipe:: default
 #
 # The MIT License (MIT)

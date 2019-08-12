@@ -1,4 +1,4 @@
-# certbot-cloudflare
+# certbot-exec-cloudflare
 
 This cookbook intends to answer the "Chicken and egg" problem of setting up a web server with a self signed cert to obtain a Let's Encrypt signed SSL certifacte.
 
@@ -38,10 +38,10 @@ Note that our domains are accumulated during our compliation phase and executed 
 
 ### Quick Start
 
-Inlude in `certbot-cloudflare` in your `metadata.rb`.
+Inlude in `certbot-exec-cloudflare` in your `metadata.rb`.
 
 ```ruby
-depends 'certbot-cloudflare'
+depends 'certbot-exec-cloudflare'
 ```
 
 Set the minimum required attributes:
