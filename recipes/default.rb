@@ -23,3 +23,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
+
+log "You don't need to add certbot-exec-cloudflare to your run list, just your metatdata.rb" do
+  level :warn
+  action :write
+end

@@ -1,4 +1,4 @@
-require_relative './certbotcf'
+require_relative './helpers'
 
 module CertbotExec
   module Cloudflare

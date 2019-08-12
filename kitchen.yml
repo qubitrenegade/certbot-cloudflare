@@ -32,10 +32,7 @@ suites:
       certbot-exec:
         print_cmd: true
         server: stage
-      certbot_cf:
+      certbot-exec-cloudflare:
         agree_to_tos: true
-        dry_run: false
+        api_key: <%= ENV['CBCF_API_KEY'] %>
         email: <%= ENV['CBCF_EMAIL'] %>
-        server: prod
-        cloudflare:
-          api_key: <%= ENV['CBCF_API_KEY'] %>
