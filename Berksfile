@@ -6,5 +6,5 @@ metadata
 
 group :integration do
   cookbook 'test-certbot-cloudflare', path: './test/fixtures/cookbook/test-certbot-cloudflare/'
-  cookbook 'certbot-exec', path: '../certbot-exec'
+  cookbook 'certbot-exec'
 end
