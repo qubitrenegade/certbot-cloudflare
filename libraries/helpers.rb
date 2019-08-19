@@ -12,6 +12,11 @@ module CertbotExec
     def certbot_cf_email
       certbot_cf['email'] || node['certbot-exec']['email']
     end
+
+    def certbot_cf_packages
+      certbot_cf['packages']
+    end
+
     %w(api_key credentials_path
        dns_propagation_seconds).each do |method|
       define_method :"certbot_cf_#{method}" do
