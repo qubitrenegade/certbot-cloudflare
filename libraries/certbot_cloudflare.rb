@@ -42,13 +42,6 @@ module CertbotExec
       end
       super
     end
-
-    # def certbot_install_packages
-      # super
-      # find_r.packages += ['python3-certbot-dns-cloudflare']
-    #   new_resource.packages += ['python3-certbot-dns-cloudflare']
-    #   super
-    # end
   end
   module CertbotExecResource
     prepend CertbotExecExtensions
