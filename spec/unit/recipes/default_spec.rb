@@ -1,5 +1,5 @@
 #
-# Cookbook:: certbot-cloudflare
+# Cookbook:: certbot-exec-cloudflare
 # Spec:: default
 #
 # The MIT License (MIT)
@@ -26,7 +26,7 @@
 
 require 'spec_helper'
 
-describe 'certbot-cloudflare::default' do
+describe 'certbot-exec-cloudflare::default' do
   context 'When all attributes are default, on Ubuntu 16.04' do
     let(:chef_run) do
       # for a complete list of available platforms and versions see:

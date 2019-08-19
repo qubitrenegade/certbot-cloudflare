@@ -1,6 +1,6 @@
-# certbot-cloudflare CHANGELOG
+# certbot-exec-cloudflare CHANGELOG
 
-This file is used to list changes made in each version of the certbot-cloudflare cookbook.
+This file is used to list changes made in each version of the certbot-exec-cloudflare cookbook.
 
 # 0.1.0
 

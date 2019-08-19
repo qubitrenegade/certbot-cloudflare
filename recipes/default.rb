@@ -1,5 +1,5 @@
 #
-# Cookbook:: certbot-cloudflare
+# Cookbook:: certbot-exec-cloudflare
 # Recipe:: default
 #
 # The MIT License (MIT)
@@ -24,5 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-certbot_cf 'foo.example.com'
-certbot_cf 'bar.example.com'
+log "You don't need to add certbot-exec-cloudflare to your run list, just your metatdata.rb" do
+  level :warn
+  action :write
+end

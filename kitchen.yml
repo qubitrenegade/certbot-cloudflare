@@ -29,10 +29,11 @@ suites:
       inspec_tests:
         - test/integration/default
     attributes:
-      certbot_cf:
+      certbot-exec:
         agree_to_tos: true
-        dry_run: false
+        print_cmd: true
+        server: stage
+      certbot-exec-cloudflare:
+        agree_to_tos: true
+        api_key: <%= ENV['CBCF_API_KEY'] || 'FOOBARBIZBAZ' %>
         email: <%= ENV['CBCF_EMAIL'] %>
-        server: prod
-        cloudflare:
-          api_key: <%= ENV['CBCF_API_KEY'] %>

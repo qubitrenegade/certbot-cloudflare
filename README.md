@@ -1,65 +1,80 @@
-# certbot-cloudflare
+# certbot-exec-cloudflare
 
-This cookbook intends to answer the "Chicken and egg" problem of setting up a web server with a self signed cert to obtain a Let's Encrypt signed SSL certifacte.
-
-This does so by leveraging the [`cloudflare-dns`](https://certbot-dns-cloudflare.readthedocs.io/en/stable/) authenticator plugin.  While this does require you are using CloudFlare for DNS, it does not require you use CloudFlare proxying and does not require a running web server.  (for instance, issuing an SSL certificate for an XMPP server).
+This cookbook is a plugin for the [`certbot-exec`](https://github.com/qubitrenegade/certbot-exec) cookbook that adds the [`certbot-dns-cloudflare`](https://certbot-dns-cloudflare.readthedocs.io/en/stable/) authenticator plugin to `certbot`.  
 
 ## Usage
 
-This cookbook is implemented as a library cookbook that can be called from multiple wrapper cookbooks.
+This cookbook is implemented as "library plugin" cookbook.  This means it only needs to be included in a cookbook metadata and it will take the appropriate action to modify the `certbot_exec` resource.
 
-For instance, if we're running an xmpp server on `xmpp.exmaple.com` and a web chat client on `chat.example.com`, we'll probably manage each of these services in their own cookbook.  We want each cookbook to be able to leverage `certbot_cf` resource independently of each other, but they should be able to run on the same server, and only trigger our `certbot` run once.
-
-e.g.:
-
-In our xmpp cookbook we might have:
+Include in metadata.rb:
 
 ```ruby
-# cookbook/xmpp/recipes/default.rb
-certbot_cf 'xmpp.example.com'
+depends 'certbot-exec'
+depends 'certbot-exec-cloudflare'
 ```
 
-and in our chat cookbook we might have:
+Set minimal attributes:
 
 ```ruby
-# cookbook/chat/recipes/default.rb
-certbot_cf 'chat.example.com do
-  post_hook 'systemctl restart nginx'
-end
+default['certbot-exec-cloudflare']['agree_to_tos'] = true
+default['certbot-exec-cloudflare']['api-key'] = 'FOOBAR'
 ```
 
-This will accumulate or domains which will result in a certbot commandline:
-
-```bash
-certbot ... --domains xmpp.example.com,chat.example.com
-```
-
-Note that our domains are accumulated during our compliation phase and executed at the start of our run phase.
-
-### Quick Start
-
-Inlude in `certbot-cloudflare` in your `metadata.rb`.
+Continue using `certbot_exec` as usual:
 
 ```ruby
-depends 'certbot-cloudflare'
+certbot_exec 'foo.example.com'
 ```
 
-Set the minimum required attributes:
+## Attributes
 
-```ruby
-default['certbot_cf']['agree_to_tos'] = true
-default['certbot_cf']['dry_run'] = false
-default['certbot_cf']['email'] = 'you@yourdomain.com'
-default['certbot_cf']['cloudflare']['api_key'] = 'abc123'
+```
+default['certbot-exec-cloudflare'] = {
+  # This is default to false,
+  # you must set it to true to denote your acceptance of _their_ TOS
+  # https://www.cloudflare.com/terms/
+  agree_to_tos: false,
+
+  # (required) CloudFlare Global API key
+  api_key: 'DEADBEEF',
+
+  # CloudFlare email address (optional), defaults to node['certbot-exec']['email']
+  email: nil,
+
+  # path to file with cloudflare email and api key
+  credentials_path: '/etc/cloudflare-certbot.ini',
+
+  # --dns-propagation-seconds cli flag, default is 10
+  dns_propagation_seconds: 10,
+}
 ```
 
-Leverage the resource
+## Contributing
 
-```ruby
-certbot_cf 'foo.example.com', 'bar.example.com'
+PRs and issues welcome!
+
+## License
+
 ```
+The MIT License (MIT)
 
-## TODO:
+Copyright (c) 2019 Qubit Renegade
 
-* be more flexible where we get certbot from
-* ohai plugin for cert discovery?
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
