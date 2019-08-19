@@ -1,17 +1,3 @@
-override['certbot-exec']['email'] = 'foobar@example.com'
-override['certbot-exec']['packages'] = case node['platform']
-                                       when 'redhat', 'centos'
-                                         %w(
-                                           certbot
-                                           python2-certbot-dns-cloudflare
-                                         )
-                                       when 'ubuntu', 'debian'
-                                         %w(
-                                           certbot
-                                           python3-certbot-dns-cloudflare
-                                         )
-                                       end
-
 default['certbot-exec-cloudflare'] = {
   # This is default to false,
   # you must set it to true to denote your acceptance of _their_ TOS
@@ -29,4 +15,10 @@ default['certbot-exec-cloudflare'] = {
 
   # --dns-propagation-seconds cli flag
   dns_propagation_seconds: 10,
+  packages: case node['platform']
+            when 'redhat', 'centos'
+              %w(python2-certbot-dns-cloudflare)
+            when 'ubuntu', 'debian'
+              %w(python3-certbot-dns-cloudflare)
+            end
 }

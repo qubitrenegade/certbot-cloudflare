@@ -1,6 +1,6 @@
 # certbot-exec-cloudflare
 
-This cookbook is a plugin for the [`certbot-exec`](https://github.com/qubitrenegade/certbot-exec) cookbook that adds the [`certbot-dns-cloudflare`](https://certbot-dns-cloudflare.readthedocs.io/en/stable/) authenticator plugin.  
+This cookbook is a plugin for the [`certbot-exec`](https://github.com/qubitrenegade/certbot-exec) cookbook that adds the [`certbot-dns-cloudflare`](https://certbot-dns-cloudflare.readthedocs.io/en/stable/) authenticator plugin to `certbot`.  
 
 ## Usage
 
@@ -44,7 +44,7 @@ default['certbot-exec-cloudflare'] = {
   # path to file with cloudflare email and api key
   credentials_path: '/etc/cloudflare-certbot.ini',
 
-  # --dns-propagation-seconds cli flag
+  # --dns-propagation-seconds cli flag, default is 10
   dns_propagation_seconds: 10,
 }
 ```

@@ -30,9 +30,10 @@ suites:
         - test/integration/default
     attributes:
       certbot-exec:
+        agree_to_tos: true
         print_cmd: true
         server: stage
       certbot-exec-cloudflare:
         agree_to_tos: true
-        api_key: <%= ENV['CBCF_API_KEY'] %>
+        api_key: <%= ENV['CBCF_API_KEY'] || 'FOOBARBIZBAZ' %>
         email: <%= ENV['CBCF_EMAIL'] %>
