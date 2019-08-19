@@ -20,5 +20,5 @@ default['certbot-exec-cloudflare'] = {
               %w(python2-certbot-dns-cloudflare)
             when 'ubuntu', 'debian'
               %w(python3-certbot-dns-cloudflare)
-            end
+            end,
 }
