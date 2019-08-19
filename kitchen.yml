@@ -36,4 +36,6 @@ suites:
       certbot-exec-cloudflare:
         agree_to_tos: true
         api_key: <%= ENV['CBCF_API_KEY'] || 'FOOBARBIZBAZ' %>
+        <% if ENV['CBCF_EMAIL'] %>
         email: <%= ENV['CBCF_EMAIL'] %>
+        <% end %>
